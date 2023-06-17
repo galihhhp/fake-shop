@@ -1,3 +1,4 @@
+import { Category, Product } from 'types/index';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 
 axios.defaults.baseURL = 'https://api.escuelajs.co/api/v1';
@@ -18,10 +19,10 @@ const getReq = (url: string) => axios.get(url).then(responseBody).catch(
 // const postReq = (url: string, body: object) => axios.post(url, body).then(responseBody).catch(responseError);
 
 const products = {
-  list: ({ offset = 0, limit = 10 }: { offset?: number, limit?: number }) => getReq(`/products?offset=${offset}&limit=${limit}`),
-  single: (id: string) => getReq(`/products/${id}`),
+  list: ({ offset = 0, limit = 10 }: { offset?: number, limit?: number }): Promise<Product[]> => getReq(`/products?offset=${offset}&limit=${limit}`),
+  single: (id: string): Promise<Product> => getReq(`/products/${id}`),
   filter: ({ offset = 0, limit = 10, filterBy = 'title', filterValue = 'Generic' }: { offset?: number, limit?: number, filterBy: string, filterValue: string }) => getReq(`/products?offset=${offset}&limit=${limit}&${filterBy}=${filterValue}`),
-  categories: () => getReq('/products/categories'),
+  categories: (): Promise<Category[]> => getReq('/categories'),
   category: (id: string) => getReq(`/products/category/${id}`),
 }
 
