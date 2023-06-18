@@ -2,7 +2,7 @@ import Navbar from "./Navbar";
 import PromoBanner from "./PromoBanner";
 
 type Props = {
-  children: JSX.Element[],
+  children: JSX.Element[] | JSX.Element;
 };
 
 const Layout: React.FC<Props> = ({ children }) => {
@@ -12,12 +12,10 @@ const Layout: React.FC<Props> = ({ children }) => {
       <Navbar />
       <main className="mb-10">{children}</main>
       <footer className="bg-black text-white py-12">
-        <div className="container">
-          asfsfffffffffffffff
-        </div>
+        <div className="container">asfsfffffffffffffff</div>
       </footer>
     </div>
-  )
-}
+  );
+};
 
 export default Layout;

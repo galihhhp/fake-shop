@@ -1,11 +1,30 @@
 import api from "hooks/axios";
 
-export const getAllProducts = async (offset?: number, limit?: number) => {
+export const getAllProducts = async (limit?: number) => {
   try {
     const response = await api.products.list({
-      offset: offset,
       limit: limit,
     });
+
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const getSingleProduct = async (id: string | undefined) => {
+  try {
+    const response = await api.products.single(id);
+
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const getProductByCategory = async (category: string | undefined, limit?: number) => {
+  try {
+    const response = await api.products.category(category, limit);
 
     return response;
   } catch (error) {
