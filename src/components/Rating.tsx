@@ -1,18 +1,18 @@
-import { Rating } from "types/index";
-
 type Props = {
-  rating: Rating;
+  rating: number;
+  stock: number;
 };
 
-const Rating = ({ rating }: Props) => {
+const Rating = ({ rating, stock }: Props) => {
   return (
     <div className="flex justify-between items-center gap-1">
       <div className="flex items-center">
         {Array.from(Array(5).keys()).map((_, index) => {
           return (
             <svg
+              key={index}
               xmlns="http://www.w3.org/2000/svg"
-              fill={index < rating.rate ? "#ffa500" : "none"}
+              fill={index < rating ? "#ffa500" : "none"}
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="#ffa500"
@@ -25,9 +25,15 @@ const Rating = ({ rating }: Props) => {
             </svg>
           );
         })}
-        <p className="text-sm ml-4">{rating.rate}</p>
+        <p className="text-sm ml-4">{rating}</p>
       </div>
-      <p className="text-sm">({rating.count}) votes</p>
+      <p className="text-sm font-bold">
+        {stock > 0 ? (
+          <span className="text-green-500">In Stock({stock})</span>
+        ) : (
+          <span className="text-red-500">Out of Stock</span>
+        )}
+      </p>
     </div>
   );
 };

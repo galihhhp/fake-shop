@@ -2,6 +2,7 @@ import "./index.css";
 
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
+import Cart from "routes/Cart";
 import Home from "routes/Home";
 import Product from "routes/Product";
 import ProductDetails from "routes/ProductDetails";
@@ -20,6 +21,10 @@ const routes = [
   {
     path: "/products/:id",
     element: <ProductDetails />,
+  },
+  {
+    path: "/cart",
+    element: <Cart />,
   },
 ];
 

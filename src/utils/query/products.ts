@@ -1,12 +1,13 @@
+import { ListProducts } from "types/index";
 import api from "hooks/axios";
 
-export const getAllProducts = async (limit?: number) => {
+export const getAllProducts = async (limit?: number): Promise<ListProducts | undefined> => {
   try {
     const response = await api.products.list({
       limit: limit,
     });
 
-    return response;
+    return response
   } catch (error) {
     console.log(error);
   }

@@ -63,8 +63,8 @@ const Home = () => {
 
     getAllProducts(12)
       .then((data) => {
-        setProdutcs(data);
-        console.log("render", data);
+        setProdutcs(data?.products);
+        // console.log(data);
       })
       .catch((err) => {
         console.log(err);
@@ -72,7 +72,7 @@ const Home = () => {
 
     getAllProducts(6)
       .then((data) => {
-        setFlashSale(data);
+        setFlashSale(data?.products);
       })
       .catch((err) => {
         console.log(err);
@@ -80,7 +80,7 @@ const Home = () => {
 
     getAllProducts(4)
       .then((data) => {
-        setBestSelling(data);
+        setBestSelling(data?.products);
       })
       .catch((err) => {
         console.log(err);
@@ -94,22 +94,8 @@ const Home = () => {
   return (
     // <div>asfs</div>
     <Layout>
-      <div className="flex md:flex-row flex-col container md:px-0 px-5">
-        <div className="md:border-r border-neutral-300 py-6 gap-4 overflow-x-scroll md:overflow-x-hidden flex md:flex-col md:w-[20%]">
-          {categories &&
-            categories.map((category) => {
-              return (
-                <button
-                  key={category}
-                  className="w-full text-start hover:font-bold uppercase">
-                  {category}
-                </button>
-              );
-            })}
-        </div>
-        <div className="md:p-6 md:w-[80%]">
-          <div className="bg-black h-[200px] md:h-[300px]">sfa</div>
-        </div>
+      <div className="flex flex-col justify-center items-center container md:px-0 px-5 mt-5 gap-4">
+        <div className="bg-black w-full h-[200px] md:h-[500px]">sfa</div>
       </div>
       <Section title="Today's">
         <div className="flex items-center gap-10">

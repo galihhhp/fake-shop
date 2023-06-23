@@ -29,7 +29,7 @@ const ProductDetails = () => {
     if (product) {
       getProductByCategory(product.category, 4)
         .then((data) => {
-          setRelatedProducts(data);
+          setRelatedProducts(data?.products);
         })
         .catch((err) => {
           console.log(err);
@@ -37,13 +37,22 @@ const ProductDetails = () => {
     }
   }, [product]);
 
-  console.log(relatedProducts);
+  const discountCalc = (price: number, discount: number) => {
+    if (discount === 0) {
+      return price;
+    } else {
+      const discountPrice = (price * discount) / 100;
+      return Math.round(price - discountPrice);
+    }
+  };
+
+  console.log(product);
 
   return product ? (
     <Layout>
       <div className="flex container mt-10 mb-20 gap-8">
         <img
-          src={product.image}
+          src={product.thumbnail}
           alt=""
           className="w-[40%] h-[600px] bg-cover bg-center"
         />
@@ -51,8 +60,22 @@ const ProductDetails = () => {
           <p className="uppercase font-bold">{product.category}</p>
           <h1 className="text-4xl font-bold uppercase">{product.title}</h1>
           <p className="">{product.description}</p>
-          <Rating rating={product.rating} />
-          <p className="font-bold text-xl text-red-500">${product.price}</p>
+          <Rating rating={product.rating} stock={product.stock} />
+          <p className="text-red-500 font-bold">
+            {product.discountPercentage > 0 ? (
+              <span className="text-gray-400 line-through mr-2">
+                ${product.price}
+              </span>
+            ) : null}
+            <span
+              className={
+                product.discountPercentage > 0
+                  ? "text-red-500 font-bold"
+                  : "text-gray-400 font-bold"
+              }>
+              ${discountCalc(product.price, product.discountPercentage)}
+            </span>
+          </p>
           <div className="flex justify-between">
             <div className="flex gap-2">
               <button className="bg-red-500 w-56 p-2 rounded-md text-white">
