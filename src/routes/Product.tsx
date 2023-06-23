@@ -11,7 +11,7 @@ const Product = () => {
   useEffect(() => {
     getAllProducts(limit)
       .then((data) => {
-        setProdutcs(data);
+        setProdutcs(data?.products);
       })
       .catch((err) => {
         console.log(err);
